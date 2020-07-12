@@ -204,20 +204,34 @@ function vtkWidgetRepresentation(publicAPI, model) {
     });
   };
 
-  publicAPI.getDisplayWorldHeightAt = (worldCoord) => {
+  publicAPI.getDisplayScaleAtCoord = (worldCoord) => {
     const {
       dispHeightFactor,
       cameraPosition,
       cameraDir,
       isParallel,
+      rendererPixelDims,
     } = model.displayScaleParams;
+    let scale = 1;
     if (isParallel) {
-      return dispHeightFactor;
+      scale = dispHeightFactor;
+    } else {
+      const worldCoordToCamera = [...worldCoord];
+      subtract(worldCoordToCamera, cameraPosition, worldCoordToCamera);
+      scale = dot(worldCoordToCamera, cameraDir) * dispHeightFactor;
     }
-    const worldCoordToCamera = [...worldCoord];
-    subtract(worldCoordToCamera, cameraPosition, worldCoordToCamera);
-    return dot(worldCoordToCamera, cameraDir) * dispHeightFactor;
+
+    if (model.scaleInPixels) {
+      const rHeight = rendererPixelDims[1];
+      scale /= rHeight;
+    }
+
+    return scale;
   };
+
+  // to keep backwards compatibility; getDisplayScaleAtCoord returns
+  // different things depending on if scaleInPixels is enabled.
+  publicAPI.getDisplayWorldHeightAt = publicAPI.getDisplayScaleAtCoord;
 
   // Make sure setting the labels at build time works with string/array...
   publicAPI.setLabels(model.labels);
