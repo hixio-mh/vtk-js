@@ -145,6 +145,11 @@ This mixin adds an `origin` property.
 
 These mixins adds a single scale factor and a 3-component scale factor, respectively.
 
+If `scaleByDisplay` is set to true for a representation, then scale1 will be interpreted as
+a fraction of the display height. (Only for representations that support this; grep for
+"scaleByDisplay" to see which representations do.) If `scaleByDisplay` and `scaleInPixels`
+are true, then scale1 will be treated as a pixel height value.
+
 ##### visibleMixin
 
 This mixin adds a `visible` flag.

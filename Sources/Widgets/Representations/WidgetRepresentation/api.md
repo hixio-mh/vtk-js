@@ -22,3 +22,19 @@ that match the target labels.
 
 Should be used when creating an actor for the representation. It will apply widget-wide configuration such as coincident topology parameters to the mapper.
 
+## getDisplayScaleAtCoord(coord)
+
+`getDisplayScaleAtCoord(coord)` will return some scaling to be applied to a
+widget representation. What it returns depends on what flags are set. If
+`model.scaleByDisplay=true` and `model.scaleInPixels=false`, the method will
+return the viewport height in world coordinates at a particular point. In other
+words, it is the height of the rectangle formed by the intersection of the
+plane (defined by the camera normal and the provided coord) and the view
+frustrum. In this mode of operation, representations will typically treat
+properties like `scale1` to be a fraction of the viewport height.
+
+When `model.scaleByDisplay=true` and `model.scaleInPixels=true`,
+`getDisplayScaleAtCoord(coord)` returns a (vertical) world distance that
+corresponds to a single pixel in display space. Representations will typically
+treat properties like `scale1` to be the height of the representation in pixel
+values.
