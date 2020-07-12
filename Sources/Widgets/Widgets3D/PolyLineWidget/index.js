@@ -43,6 +43,7 @@ function vtkPolyLineWidget(publicAPI, model) {
             labels: ['handles'],
             initialValues: {
               scaleByDisplay: true,
+              scaleInPixels: true,
             },
           },
           {
@@ -50,6 +51,7 @@ function vtkPolyLineWidget(publicAPI, model) {
             labels: ['moveHandle'],
             initialValues: {
               scaleByDisplay: true,
+              scaleInPixels: true,
             },
           },
           { builder: vtkSVGLandmarkRepresentation, labels: ['handles'] },
