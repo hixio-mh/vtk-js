@@ -36,7 +36,7 @@
     "pako": "1.0.11",
     "seedrandom": "3.0.5",
     "shelljs": "0.8.4",
-    "webvr-polyfill": "0.10.11",
+    "webvr-polyfill": "0.10.12",
     "webworker-promise": "0.4.2",
     "xmlbuilder": "15.1.1"
   },
